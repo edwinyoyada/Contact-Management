@@ -1,0 +1,27 @@
+{
+  "name": "pixel-house",
+  "version": "1.0.0",
+  "description": "Contact Management App",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/edwinyoyada/pixel-house.git"
+  },
+  "author": "Edwin Yoyada",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/edwinyoyada/pixel-house/issues"
+  },
+  "homepage": "https://gitlab.com/edwinyoyada/pixel-house#README",
+  "dependencies": {
+    "async": "^2.0.1",
+    "bluebird": "^3.4.2",
+    "body-parser": "^1.15.2",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "mongoose": "^4.5.10"
+  }
+}
