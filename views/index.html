@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/materialize.min.css">
+	<title>Contact Management</title>
+</head>
+<body ng-app="contactApp">
+
+	<nav>
+		<div class="container">
+			<div class="nav-wrapper">
+				<a ui-sref="app" class="brand-logo">Contact Management</a>
+				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+				<ul class="right hide-on-med-and-down">
+					<li><a ui-sref="app">App</a></li>
+					<li><a ui-sref="about">About Developer</a></li>
+				</ul>
+				<ul class="side-nav" id="mobile-demo">
+					<li><a ui-sref="app">App</a></li>
+					<li><a ui-sref="about">About Developer</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div ui-view></div>
+	</div>
+
+	<script src="assets/js/angular.min.js"></script>
+	<script src="assets/js/angular-ui-router.min.js"></script>
+	<script src="assets/js/angular-resource.min.js"></script>
+	<script src="assets/js/ng-file-upload/ng-file-upload.min.js"></script>
+	<script src="assets/js/app.js"></script>
+	<script src="assets/js/controller.js"></script>
+	<script src="assets/js/service.js"></script>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/materialize.min.js"></script>
+	<script src="assets/js/main.js"></script>
+</body>
+</html>

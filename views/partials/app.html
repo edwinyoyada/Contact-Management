@@ -1,0 +1,44 @@
+<div>
+	<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+		<a class="btn-floating btn-large red" ng-click="showModal()" ui-sref=".detail({ id: 0 })">
+			<i class="large material-icons">add</i>
+		</a>
+	</div>
+	<div class="row">
+		<div class="col s12 m6 l4" ng-repeat="contact in contacts">
+				<div class="card">
+					<div class="card-image">
+						<img ng-if="contact.avatar" src="/assets/avatar/{{ contact.avatar }}">
+						<img ng-if="!contact.avatar" src="/assets/avatar/no-avatar.png">
+					</div>
+					<div class="card-content">
+						<span class="card-title activator grey-text text-darken-4">{{ contact.name }} <i class="material-icons right">more_vert</i></span>
+						<!-- <p>{{ contact.email }}</p>
+						<p>{{ contact.phone }}</p> -->
+					</div>
+					<div class="card-reveal">
+				    	<span class="card-title grey-text text-darken-4">{{ contact.title }} {{ contact.name }}<i class="material-icons right">close</i></span>
+				    	<p>Email: {{ contact.email[0] }}</p>
+				    	<p>Phone: {{ contact.phone[0] }}</p>
+				    	<p>Address: {{ contact.address[0] }}</p>
+				    	<p>Company: {{ contact.company }}</p>
+				    </div>
+					<div class="card-action">
+						<a ng-click="showModal()" ui-sref=".detail({ id: contact._id })">
+							Edit
+						</a>
+						<a href="#" type="file" ngf-select="uploadFiles($file, $invalidFiles, contact._id)">
+							Change Avatar
+						</a>
+						<a ng-click="deleteContact(contact)" href="#">
+							Delete
+						</a>
+					</div>
+				</div>
+		</div>
+	</div>
+</div>
+
+<div id="modal1" class="modal">
+	<div ui-view></div>
+</div>

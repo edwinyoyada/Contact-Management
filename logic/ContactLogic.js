@@ -2,10 +2,14 @@ var contact = require('../model/ContactModel');
 var commonLogic = require('./CommonLogic');
 var httpCodes = require('../helper/HttpCodes');
 var messages = require('../helper/Messages');
+var fs = require('fs');
 
 var ContactLogic = {
-    getAllContacts: function (callback) {
-        contact.find({ is_active: true }, function (err, res) {
+    getAllContacts: function (query, callback) {
+
+    	var searchParams = this.getSearchParams(query);
+
+        contact.find(searchParams, function (err, res) {
             var response = '';
             if(err) {
                 response = commonLogic.buildResponse(messages.InternalServerError, err);
@@ -68,6 +72,7 @@ var ContactLogic = {
                 phone: params.phone,
                 address: params.address,
                 company: params.company,
+                others: params.others,
                 is_active: true,
                 last_update: commonLogic.getNow()
             });
@@ -102,9 +107,13 @@ var ContactLogic = {
                 return;
             }
 
+            if(contactData.avatar != params.avatar)
+                fs.unlink('./public/avatar/' + contactData.avatar);
+
             contactData.email.pull();
             contactData.phone.pull();
             contactData.address.pull();
+            contactData.others.pull();
 
             contactData.name = params.name;
             contactData.title = params.title;
@@ -112,6 +121,36 @@ var ContactLogic = {
             contactData.phone = params.phone;
             contactData.address = params.address;
             contactData.company = params.company;
+            contactData.others = params.others;
+            contactData.last_update = commonLogic.getNow();
+
+            contactData.save(function (err, data) {
+                response = commonLogic.buildResponse(messages.OK, messages.ContactUpdated);
+                callback(httpCodes.OK, response);
+            });
+        });
+    },
+
+    editAvatar: function (id, params, callback) {
+        var dis = this;
+        contact.findOne({ _id: id, is_active: true }, function (err, contactData) {
+            var response = '';
+            if(err) {
+                response = commonLogic.buildResponse(messages.InternalServerError, err);
+                callback(httpCodes.InternalServerError, response);
+                return;
+            }
+
+            if(contactData.length === 0) {
+                response = commonLogic.buildResponse(messages.NotFound);
+                callback(httpCodes.NotFound, response);
+                return;
+            }
+
+            if(contactData.avatar != params.avatar && contactData.avatar)
+                fs.unlink('./public/assets/avatar/' + contactData.avatar);
+
+            contactData.avatar = params.avatar;
             contactData.last_update = commonLogic.getNow();
 
             contactData.save(function (err, data) {
@@ -156,6 +195,35 @@ var ContactLogic = {
             err.push('Please enter correct phone number');
 
         return err;
+    },
+
+    getSearchParams: function (query) {
+        var searchParams = {};
+
+    	var name = query.name;
+    	var email = query.email;
+    	var phone = query.phone;
+    	var address = query.address;
+    	var company = query.company;
+
+        searchParams.is_active = true;
+
+        if(name)
+            searchParams.name = new RegExp(name, "i");
+
+        if(email)
+            searchParams.email = new RegExp(email, "i");
+
+        if(phone)
+            searchParams.phone = new RegExp(phone, "i");
+
+        if(address)
+            searchParams.address = new RegExp(address, "i");
+
+        if(company)
+            searchParams.company = new RegExp(company, "i");
+
+        return searchParams;
     }
 };
 

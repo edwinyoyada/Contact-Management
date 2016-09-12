@@ -8,6 +8,7 @@ var ContactSchema = new Schema ({
     phone: [],
     address: [],
     company: String,
+	avatar: String,
 	others: [Schema.Types.Mixed],
 	is_active: Boolean,
 	last_update: Date
@@ -17,7 +18,7 @@ var ContactSchema = new Schema ({
     toJSON: { virtuals: true }
 });
 
-// UserSchema.virtual('full_avatar_url').get(function () {
+// ContactSchema.virtual('full_avatar_url').get(function () {
 // 	if(this.avatar)
 // 		return avatarBaseUrl + this.avatar;
 // });

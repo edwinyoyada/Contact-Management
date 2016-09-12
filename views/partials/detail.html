@@ -1,0 +1,88 @@
+<div class="modal-content">
+    <div class="row">
+        <div class="col s12">
+            <h3>{{ pageTitle }}</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <div class="row">
+                <div class="input-field col s10">
+                    <input id="title" type="text" class="validate" ng-model="contact.title">
+                    <label for="title" ng-class="contact.title ? 'active' : ''">Title</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10">
+                    <input id="name" type="text" class="validate" ng-model="contact.name">
+                    <label for="name" ng-class="contact.name ? 'active' : ''">Name</label>
+                </div>
+            </div>
+
+            <div class="row" ng-repeat="email in emails">
+                <div class="input-field col s10">
+                    <input id="email" type="text" class="validate" ng-model="email.value">
+                    <label for="email" ng-class="email.value ? 'active' : ''">Email</label>
+                </div>
+                <div class="input-field col s2">
+                    <button type="button" ng-click="removeEmail($index)" class="waves-effect waves-light btn">X</button>
+                </div>
+            </div>
+            <button type="button" ng-click="addEmail()" class="waves-effect waves-light btn">Add Email</button>
+
+            <div class="row" ng-repeat="phone in phones">
+                <div class="input-field col s10">
+                    <input id="phone" type="text" class="validate" ng-model="phone.value">
+                    <label for="phone" ng-class="phone.value ? 'active' : ''">Phone</label>
+                </div>
+                <div class="input-field col s2">
+                    <button type="button" ng-click="removePhone($index)" class="waves-effect waves-light btn">X</button>
+                </div>
+            </div>
+            <button type="button" ng-click="addPhone()" class="waves-effect waves-light btn">Add Phone</button>
+
+            <div class="row" ng-repeat="address in addresses">
+                <div class="input-field col s10">
+                    <input id="address" type="text" class="validate" ng-model="address.value">
+                    <label for="address" ng-class="address.value ? 'active' : ''">Address</label>
+                </div>
+                <div class="input-field col s2">
+                    <button type="button" ng-click="removeAddress($index)" class="waves-effect waves-light btn">X</button>
+                </div>
+            </div>
+            <button type="button" ng-click="addAddress()" class="waves-effect waves-light btn">Add Address</button>
+
+            <div class="row">
+                <div class="input-field col s10">
+                    <input id="company" type="text" class="validate" ng-model="contact.company">
+                    <label for="company" ng-class="contact.company ? 'active' : ''">Company</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <h5>Other Info</h5>
+                </div>
+            </div>
+            <div class="row" ng-repeat="other in others">
+                <div class="input-field col s5">
+                    <input id="company" type="text" class="validate" ng-model="other.key">
+                    <label for="company" ng-class="contact.company ? 'active' : ''">Info Name</label>
+                </div>
+                <div class="input-field col s5">
+                    <input id="company" type="text" class="validate" ng-model="other.value">
+                    <label for="company" ng-class="contact.company ? 'active' : ''">Info Value</label>
+                </div>
+                <div class="input-field col s2">
+                    <button type="button" ng-click="removeOther($index)" class="waves-effect waves-light btn">X</button>
+                </div>
+            </div>
+            <button type="button" ng-click="addOther()" class="waves-effect waves-light btn">Add Other Info</button>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" ng-click="saveContact()" class=" modal-action modal-close waves-effect waves-green btn red">Save</a>
+    </div>
+</div>

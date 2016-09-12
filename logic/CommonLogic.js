@@ -10,14 +10,15 @@ var CommonLogic = {
     },
     validateEmail: function (emails) {
         var res = [];
-        for(i = 0; i < phones.length; i++) {
+
+        for(i = 0; i < emails.length; i++) {
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            res.push(re.test(email));
+            res.push(re.test(emails[i]));
         }
 
-        var result = res.indexOf(null);
-        
-        if(result > 0)
+        var result = res.indexOf(false);
+
+        if(result != -1)
             return false;
 
         return true;
@@ -27,21 +28,26 @@ var CommonLogic = {
         var lc = [];
 
         for(i = 0; i < phones.length; i++) {
-            var matcher = phone[i].match(/^\d+$/);
+            var matcher = phones[i].match(/^\d+$/);
             re.push(matcher);
 
-            var lengthChecker = phone[i].length > 12;
+            var lengthChecker = phones[i].length > 12;
             lc.push(lengthChecker);
         }
 
         var result = re.indexOf(null);
-        var lengthResult = re.indexOf(true);
+        var lengthResult = lc.indexOf(true);
 
-        if(result > 0 || lengthResult > 0)
+        if(result != -1 || lengthResult != -1)
             return false;
 
         return true;
-    }
+    },
+    validateMimeType: function (mimeType) {
+        var arrMimeType = [ 'image/jpeg', 'image/jpg', 'image/gif', 'image/png' ];
+
+        return arrMimeType.indexOf(mimeType) > -1;
+    },
 };
 
 module.exports = CommonLogic;
