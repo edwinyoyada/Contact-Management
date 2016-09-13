@@ -68,7 +68,7 @@ contactAppControllers
 				this.push({ value: v });
 			}, arrAddress);
 			angular.forEach($scope.contact.others, function (v, k) {
-				this.push({ key: k, value: v });
+				this.push({ key: Object.keys(v), value: v[Object.keys(v)] });
 			}, arrOther);
 
 			$scope.phones = (arrPhone.length === 0) ? [{ value: '' }] : arrPhone;
@@ -148,7 +148,9 @@ contactAppControllers
 		for(i = 0; i < $scope.others.length; i++) {
 			var key = $scope.others[i].key;
 			var value = $scope.others[i].value;
-			arrOther[key] = value;
+			var obj = {};
+			obj[key] = value;
+			arrOther.push(obj);
 		}
 
 		$scope.contact.phone = arrPhone;
@@ -161,7 +163,17 @@ contactAppControllers
 				$state.go('app.info', { message: result.data });
 			},
 			function (error) {
-				$state.go('app.info', { message: error.data });
+				var errMessages = error.data.message;
+				var errMessage = '';
+				for(i = 0; i < errMessages.length; i ++) {
+					if(errMessage == '') {
+						errMessage = errMessages[i];
+					}
+					else {
+						errMessage += '<br>' + errMessages[i];
+					}
+				}
+				$state.go('app.info', { message: errMessage });
 			});
 		}
 		else {
@@ -169,14 +181,24 @@ contactAppControllers
 				$state.go('app.info', { message: result.data });
 			},
 			function (error) {
-				$state.go('app.info', { message: error.data });
+				var errMessages = error.data.message;
+				var errMessage = '';
+				for(i = 0; i < errMessages.length; i ++) {
+					if(errMessage == '') {
+						errMessage = errMessages[i];
+					}
+					else {
+						errMessage += '<br>' + errMessages[i];
+					}
+				}
+				$state.go('app.info', { message: errMessage });
 			});
 		}
 	};
 }])
-.controller('infoCtrl', ['$scope', '$state', '$stateParams', function ($scope, $state, $stateParams) {
+.controller('infoCtrl', ['$scope', '$state', '$stateParams', '$sce', function ($scope, $state, $stateParams, $sce) {
 	$('#modal1').openModal();
-	$scope.message = $stateParams.message;
+	$scope.message = $sce.trustAsHtml($stateParams.message);
 	$scope.closeModal = function () {
 		$('#modal1').closeModal();
 		$state.go('app', {}, { reload: true });

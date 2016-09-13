@@ -5,7 +5,7 @@
 		</a>
 	</div>
 	<div class="row">
-		<div class="col s12 m6 l4" ng-repeat="contact in contacts">
+		<div class="col s12 m6 l4" ng-repeat="contact in contacts" ng-show="contacts.length > 0">
 				<div class="card">
 					<div class="card-image">
 						<img ng-if="contact.avatar" src="/assets/avatar/{{ contact.avatar }}">
@@ -13,8 +13,6 @@
 					</div>
 					<div class="card-content">
 						<span class="card-title activator grey-text text-darken-4">{{ contact.name }} <i class="material-icons right">more_vert</i></span>
-						<!-- <p>{{ contact.email }}</p>
-						<p>{{ contact.phone }}</p> -->
 					</div>
 					<div class="card-reveal">
 				    	<span class="card-title grey-text text-darken-4">{{ contact.title }} {{ contact.name }}<i class="material-icons right">close</i></span>
@@ -35,6 +33,10 @@
 						</a>
 					</div>
 				</div>
+		</div>
+		<div class="col s12 center-align" ng-hide="contacts.length > 0">
+			<h4>No contacts found. </h4>
+			<h4>Click the add button below to start creating new contact.</h4>
 		</div>
 	</div>
 </div>

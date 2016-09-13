@@ -22,9 +22,6 @@ contactApp.config(function($stateProvider, $urlRouterProvider) {
             url: '/info/:message',
             templateUrl: 'partials/info.html',
             controller: 'infoCtrl'
-        })
-        .state('about', {
-            // we'll get to this in a bit
         });
 
 });

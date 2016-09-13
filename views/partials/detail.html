@@ -9,14 +9,23 @@
         <div class="col s12">
             <div class="row">
                 <div class="input-field col s10">
-                    <input id="title" type="text" class="validate" ng-model="contact.title">
-                    <label for="title" ng-class="contact.title ? 'active' : ''">Title</label>
+                    <h6>Title</h6>
+                    <select ng-model="contact.title" style="display:inline-block">
+                        <option ng-repeat="title in titles">{{ title }}</option>
+                        <label>Materialize Select</label>
+                    </select>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s10">
                     <input id="name" type="text" class="validate" ng-model="contact.name">
                     <label for="name" ng-class="contact.name ? 'active' : ''">Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10">
+                    <input id="company" type="text" class="validate" ng-model="contact.company">
+                    <label for="company" ng-class="contact.company ? 'active' : ''">Company</label>
                 </div>
             </div>
 
@@ -26,10 +35,10 @@
                     <label for="email" ng-class="email.value ? 'active' : ''">Email</label>
                 </div>
                 <div class="input-field col s2">
-                    <button type="button" ng-click="removeEmail($index)" class="waves-effect waves-light btn">X</button>
+                    <button type="button" ng-click="removeEmail($index)" class="waves-effect waves-light btn red accent-4">X</button>
                 </div>
             </div>
-            <button type="button" ng-click="addEmail()" class="waves-effect waves-light btn">Add Email</button>
+            <button type="button" ng-click="addEmail()" class="waves-effect waves-light btn blue accent-2">Add Email</button>
 
             <div class="row" ng-repeat="phone in phones">
                 <div class="input-field col s10">
@@ -37,10 +46,10 @@
                     <label for="phone" ng-class="phone.value ? 'active' : ''">Phone</label>
                 </div>
                 <div class="input-field col s2">
-                    <button type="button" ng-click="removePhone($index)" class="waves-effect waves-light btn">X</button>
+                    <button type="button" ng-click="removePhone($index)" class="waves-effect waves-light btn red accent-4">X</button>
                 </div>
             </div>
-            <button type="button" ng-click="addPhone()" class="waves-effect waves-light btn">Add Phone</button>
+            <button type="button" ng-click="addPhone()" class="waves-effect waves-light btn blue accent-2">Add Phone</button>
 
             <div class="row" ng-repeat="address in addresses">
                 <div class="input-field col s10">
@@ -48,17 +57,10 @@
                     <label for="address" ng-class="address.value ? 'active' : ''">Address</label>
                 </div>
                 <div class="input-field col s2">
-                    <button type="button" ng-click="removeAddress($index)" class="waves-effect waves-light btn">X</button>
+                    <button type="button" ng-click="removeAddress($index)" class="waves-effect waves-light btn red accent-4">X</button>
                 </div>
             </div>
-            <button type="button" ng-click="addAddress()" class="waves-effect waves-light btn">Add Address</button>
-
-            <div class="row">
-                <div class="input-field col s10">
-                    <input id="company" type="text" class="validate" ng-model="contact.company">
-                    <label for="company" ng-class="contact.company ? 'active' : ''">Company</label>
-                </div>
-            </div>
+            <button type="button" ng-click="addAddress()" class="waves-effect waves-light btn blue accent-2">Add Address</button>
 
             <div class="row">
                 <div class="col s12">
@@ -68,21 +70,21 @@
             <div class="row" ng-repeat="other in others">
                 <div class="input-field col s5">
                     <input id="company" type="text" class="validate" ng-model="other.key">
-                    <label for="company" ng-class="contact.company ? 'active' : ''">Info Name</label>
+                    <label for="company" ng-class="other.key ? 'active' : ''">Info Name</label>
                 </div>
                 <div class="input-field col s5">
                     <input id="company" type="text" class="validate" ng-model="other.value">
-                    <label for="company" ng-class="contact.company ? 'active' : ''">Info Value</label>
+                    <label for="company" ng-class="other.value ? 'active' : ''">Info Value</label>
                 </div>
                 <div class="input-field col s2">
-                    <button type="button" ng-click="removeOther($index)" class="waves-effect waves-light btn">X</button>
+                    <button type="button" ng-click="removeOther($index)" class="waves-effect waves-light btn red accent-4">X</button>
                 </div>
             </div>
-            <button type="button" ng-click="addOther()" class="waves-effect waves-light btn">Add Other Info</button>
+            <button type="button" ng-click="addOther()" class="waves-effect waves-light btn blue accent-2">Add Other Info</button>
 
         </div>
     </div>
     <div class="modal-footer">
-        <a href="#" ng-click="saveContact()" class=" modal-action modal-close waves-effect waves-green btn red">Save</a>
+        <a href="#" ng-click="saveContact()" class=" modal-action modal-close waves-effect waves-green btn blue accent-4">Save</a>
     </div>
 </div>
