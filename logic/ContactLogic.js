@@ -200,6 +200,7 @@ var ContactLogic = {
     getSearchParams: function (query) {
         var searchParams = {};
 
+        var wildcard = query.wildcard;
     	var name = query.name;
     	var email = query.email;
     	var phone = query.phone;
@@ -207,6 +208,15 @@ var ContactLogic = {
     	var company = query.company;
 
         searchParams.is_active = true;
+
+        if(wildcard !== "") {
+            searchParams.name = new RegExp(wildcard, "i");
+            searchParams.email = new RegExp(wildcard, "i");
+            searchParams.phone = new RegExp(wildcard, "i");
+            searchParams.address = new RegExp(wildcard, "i");
+            searchParams.company = new RegExp(wildcard, "i");
+            return searchParams;
+        }
 
         if(name)
             searchParams.name = new RegExp(name, "i");

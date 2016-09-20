@@ -3,6 +3,26 @@ var contactAppControllers = angular.module('contactApp.controllers', []);
 contactAppControllers
 
 .controller('contactListCtrl', ['$scope', '$state', 'Contact', 'popupService', 'Upload', '$timeout', function($scope, $state, Contact, popupService, Upload, $timeout){
+	$scope.searchParams = [
+							{ key: 'wildcard', value: 'All' },
+							{ key: 'name', value: 'Name' },
+							{ key: 'email', value: 'Email' },
+							{ key: 'phone', value: 'Phone' },
+							{ key: 'address', value: 'Address' },
+							{ key: 'company', value: 'Company' }
+						];
+	$scope.searchQuery = {};
+	$scope.searchQuery.params = 'wildcard';
+
+	$scope.searchContacts = function () {
+		var search = {};
+		search[$scope.searchQuery.params] =$scope.searchQuery.keywords;
+
+		var contacts = Contact.query(search,function () {
+			$scope.contacts = contacts.data;
+		});
+	};
+
 	var contacts = Contact.query(function () {
 		$scope.contacts = contacts.data;
 	});
